@@ -66,6 +66,23 @@ allprojects {
     // license plugin automatically fires these tasks, disable them and run them during releases
     gradle.startParameter.excludedTaskNames += "licenseMain"
     gradle.startParameter.excludedTaskNames += "licenseTest"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation('org.smali:smali') {
+            version {
+                branch = 'master'
+            }
+       }
+        implementation('org.smali:baksmali') {
+            version {
+                branch = 'master'
+            }
+       }
+    }
 }
 
 if (!('release' in gradle.startParameter.taskNames)) {
@@ -112,7 +129,7 @@ subprojects {
 
     ext {
         depends = [
-                baksmali: 'org.smali:baksmali:2.4.0',
+                baksmali: 'org.smali:baksmali',
                 commons_cli: 'commons-cli:commons-cli:1.4',
                 commons_io: 'commons-io:commons-io:2.4',
                 commons_lang: 'org.apache.commons:commons-lang3:3.1',
@@ -120,7 +137,7 @@ subprojects {
                 junit: 'junit:junit:4.12',
                 proguard_gradle: 'com.guardsquare:proguard-gradle:7.0.0',
                 snakeyaml: 'org.yaml:snakeyaml:1.18:android',
-                smali: 'org.smali:smali:2.4.0',
+                smali: 'org.smali:smali',
                 xmlpull: 'xpp3:xpp3:1.1.4c',
                 xmlunit: 'xmlunit:xmlunit:1.6',
         ]
